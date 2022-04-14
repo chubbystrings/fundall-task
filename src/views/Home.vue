@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <home-component></home-component>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { defineComponent, computed } from "vue";
+import useReducer from "@/store";
+import HomeComponent from "@/components/HomeComponent.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
-    HelloWorld,
+    HomeComponent,
+  },
+
+  setup() {
+    const { state } = useReducer();
+
+    const isAuth = computed(() => state.isLoading);
+
+    return { isAuth };
   },
 });
 </script>
